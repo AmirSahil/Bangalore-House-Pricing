@@ -65,3 +65,7 @@
 +conda-forge/osx-64::tornado-6.2-py37h994c40b_0
 +conda-forge/osx-64::zeromq-4.3.4-he49afe7_1
 # update specs: ['libcxx', 'libffi', 'python-dateutil', 'parso', 'pip', 'readline', 'xz', 'jedi', 'wheel', 'ncurses', 'tk', 'backports', 'packaging', 'psutil', 'libzlib', 'pyzmq', 'libsodium', 'backcall', 'pexpect', 'pygments', 'matplotlib-inline', 'ca-certificates', 'python=3.7', 'traitlets', 'jupyter_client', 'backports.functools_lru_cache', 'appnope', 'jupyter_core', 'ipython', 'python_abi', 'sqlite', 'entrypoints', 'bzip2', 'debugpy', 'setuptools', 'zeromq', 'ptyprocess', 'pyparsing', 'zlib', 'nest-asyncio', 'decorator', 'tornado', 'pickleshare', 'six', 'prompt-toolkit', 'wcwidth', 'openssl', 'ipykernel']
+==> 2022-10-01 17:05:34 <==
+# cmd: /Users/amirsahil/opt/anaconda3/bin/conda install -p /Users/amirsahil/Documents/Projects/Projects-IN/Banglore-House-Pricing/bhp ipykernel --update-deps --force-reinstall
+# conda version: 4.13.0
+# update specs: ['readline', 'six', 'pygments', 'setuptools', 'backports.functools_lru_cache', 'wcwidth', 'tk', 'xz', 'psutil', 'ipython', 'pyparsing', 'appnope', 'libsqlite', 'pickleshare', 'openssl', 'backcall', 'zeromq', 'python-dateutil', 'ptyprocess', 'jupyter_client', 'debugpy', 'decorator', 'nest-asyncio', 'wheel', 'sqlite', 'pexpect', 'ncurses', 'libsodium', 'jupyter_core', 'tornado', 'prompt-toolkit', 'entrypoints', 'libffi', 'backports', 'python_abi', 'jedi', 'libcxx', 'parso', 'ca-certificates', 'pyzmq', 'matplotlib-inline', 'python=3.7', 'traitlets', 'pip', 'packaging', 'libzlib', 'ipykernel']

@@ -10,9 +10,16 @@ def load_saved_artifacts():
     global __locations
     global __model
 
-    __data_columns = json.load(open('columns.json','r'))
-    __locations = __data_columns[3:]
-    __model = pickle.load(open('bhp.pkl','rb'))
+    # __data_columns = json.load(open('artifacts/columns.json','r'))
+    # __locations = __data_columns['data_columns'][3:]
+    # __model = pickle.load(open('artifacts/bhp.pkl','rb'))
+
+    with open("./artifacts/columns.json", 'r') as f:
+        __data_columns = json.load(f)['data_columns']
+        __locations = __data_columns[3:]
+
+    with open("./artifacts/bhp.pickle", 'rb') as f:
+        __model = pickle.load(f)
     
     print("Artifacts Loaded.")
 
