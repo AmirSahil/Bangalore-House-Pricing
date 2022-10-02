@@ -1,4 +1,9 @@
-import numpy as np, json, pickle
+from flask import Flask, render_template, request, app, jsonify
+import json
+import pickle
+import numpy as np
+
+app = Flask(__name__)
 
 __locations = None
 __data_columns = None
@@ -10,20 +15,15 @@ def load_saved_artifacts():
     global __locations
     global __model
 
-    # __data_columns = json.load(open('artifacts/columns.json','r'))
-    # __locations = __data_columns['data_columns'][3:]
-    # __model = pickle.load(open('artifacts/bhp.pkl','rb'))
-
     with open("./artifacts/columns.json", 'r') as f:
         __data_columns = json.load(f)['data_columns']
         __locations = __data_columns[3:]
 
     with open("./artifacts/bhp.pickle", 'rb') as f:
         __model = pickle.load(f)
-    
-    print("Artifacts Loaded.")
 
 def get_estimated_price(location, sqft, bhk, bath):
+    load_saved_artifacts()
     try:
         loc_index = __data_columns.index(location.lower())
     except:
@@ -38,13 +38,15 @@ def get_estimated_price(location, sqft, bhk, bath):
 
     return round(__model.predict([x])[0], 2)
 
-def get_location_names():
-    return __locations
+@app.route('/')
+def home():
+    return render_template('home.html')
 
-if __name__ == '__main__':
-    load_saved_artifacts()
-    print(get_location_names())
-    print(get_estimated_price('1st Phase JP Nagar', 1000, 3, 3))
-    print(get_estimated_price('1st Phase JP Nagar', 1000, 2, 2))
-    print(get_estimated_price('Kalhalli', 1000, 2, 2))
-    print(get_estimated_price('Ejipurar', 1000, 2, 2))
+@app.route('/predict_api', methods=['POST'])
+def predict_api():
+    data = request.json['data']
+    output = get_estimated_price(data['location'], data['sqft'], data['bhk'], data['bath'])
+    return jsonify(output * 100000)
+
+if __name__ == "__main__":
+    app.run(debug=True)

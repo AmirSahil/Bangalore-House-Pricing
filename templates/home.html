@@ -1,18 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Banglore Home Price Prediction</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="app.js"></script>
-	<link rel="stylesheet" href="app.css">
+    <script type="text/javascript">
+        function onPageLoad(){
+            console.log('Document loaded');
+            var url = 'https://mocki.io/v1/2af5e29d-8bf3-4b1e-85aa-8a8eb509ec0a';
+            // var url = 'http://127.0.0.1:5000/get_location_names';
+            $.get(url, function(data, status){
+                console.log('got response from get_location_names request');
+
+                if (data){
+                    var locations = data.data_columns.slice(3);
+                    var uiLocations = document.getElementById('uiLocations');
+                    $('#uiLocations').empty();
+
+                    for (var i in locations) {
+                        var opt = new Option(locations[i]);
+                        $('#uiLocations').append(opt);
+                    }
+                }
+            });
+        }
+
+        window.onload = onPageLoad;
+    </script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<!-- <div class="img"></div> -->
-<div class="title">
-    <h2>Banglore House Price Prediction</h2>
-</div>
-<form class="form">
-
+    <h1>Home Page</h1>
     <div class="sqft">
         <h2>Area (Square Feet)</h2>
         <input class="area"  type="text" id="uiSqft" class="floatLabel" name="Squareft" value="1000">
@@ -54,21 +74,12 @@
             <h2>Location</h2>
         <div>
             <select class="location" name="" id="uiLocations">
-                <option value="" disabled="disabled" selected="selected">Choose a Location</option>
-                <option>Electronic City</option>
-                <option>Rajaji Nagar</option>
         </select>
         </div>
     </div>
 
     <div class="estbutton">
-	    <button class="submit" onclick="onClickedEstimatePrice()" type="button">Estimate Price</button>
+	    <button class="submit" type="button">Estimate Price</button>
     </div>
-    
-    <div class="estresult">
-	    <div id="uiEstimatedPrice" class="result">	<h2 class="result_num"></h2> </div>
-    </div>
-</form>
-
 </body>
 </html>
