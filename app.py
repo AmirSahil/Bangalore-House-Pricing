@@ -48,5 +48,13 @@ def predict_api():
     output = get_estimated_price(data['location'], data['sqft'], data['bhk'], data['bath'])
     return jsonify(output * 100000)
 
+@app.route('/predict', methods=['GET','POST'])
+def predict():
+    data = [x for x in request.form.values()]
+    request.form.get('location')
+    print(data)
+    output = get_estimated_price(data[3], data[0], data[1], data[2])
+    return render_template("home.html", prediction = output * 100000)
+
 if __name__ == "__main__":
     app.run(debug=True)
