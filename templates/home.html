@@ -6,12 +6,13 @@
     <script type="text/javascript">
         function onPageLoad(){
             console.log('Document loaded');
-            var url = 'http://127.0.0.1:5000/get_location_names';
+            var url = 'https://mocki.io/v1/2af5e29d-8bf3-4b1e-85aa-8a8eb509ec0a';
+            // var url = 'http://127.0.0.1:5000/get_location_names';
             $.get(url, function(data, status){
-            console.log('got response from get_location_names request');
+                console.log('got response from get_location_names request');
 
                 if (data){
-                    var locations = data.locations;
+                    var locations = data.data_columns.slice(3);
                     var uiLocations = document.getElementById('uiLocations');
                     $('#uiLocations').empty();
 
@@ -22,6 +23,7 @@
                 }
             });
         }
+
         window.onload = onPageLoad;
     </script>
 
