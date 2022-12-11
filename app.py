@@ -19,7 +19,7 @@ def load_saved_artifacts():
         __data_columns = json.load(f)['data_columns']
         __locations = __data_columns[3:]
 
-    with open("./artifacts/bhp.pickle", 'rb') as f:
+    with open("./artifacts/bhp_new.pickle", 'rb') as f:
         __model = pickle.load(f)
 
 def get_estimated_price(location, sqft, bhk, bath):
@@ -51,11 +51,18 @@ def predict_api():
 @app.route('/predict', methods=['GET','POST'])
 def predict():
     data = [x for x in request.form.values()]
+    total_sqft = float(data[0])
+    bhk = int(data[1])
+    bath = int(data[2])
+    location = data[3]
     request.form.get('location')
     print(data)
-    response = jsonify(get_estimated_price(data[0], data[0], data[1], data[2]))
+    print(get_estimated_price(location, total_sqft, bhk, bath))
+    opt = get_estimated_price(location, total_sqft, bhk, bath)
+    response = jsonify(get_estimated_price(location, total_sqft, bhk, bath))
+    print(response)
     response.headers.add("Access-Control-Allow-Origin", "*")
-    return render_template("home.html", prediction = response * 100000, sqft=data[0], bed=data[1], bath=data[2], loc=data[3].title())
+    return render_template("home.html", prediction = opt * 100000, sqft=data[0], bed=data[1], bath=data[2], loc=data[3].upper())
 
 if __name__ == "__main__":
     app.run(debug=True)
